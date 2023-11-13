@@ -1,8 +1,8 @@
 #import <UIKit/UIKit.h>
 
-typedef void (*NativeBridgeCallback)(const chat* message, int nonce)
+typedef void (*NativeBridgeCallback)(const char* message, int nonce);
 
-NativeBridgeCallback* callback;
+NativeBridgeCallback callback;
 
 extern "C"
 {
@@ -11,17 +11,9 @@ extern "C"
         callback = unityCallback;
     }
 
-    void __iOSSend(const char* message)
+    void __iOSSend(const char* message, int nonce)
     {
         NSLog(@"(!!ios) : %s", message);
-    }
-    
-    void __iOSSendAndNonce(const char* message, int nonce)
-    {
-        NSLog(@"(!!ios) : %d - %s", nonce, message);
-
-        
-
-        callback()
+        callback(message, nonce);
     }
 }

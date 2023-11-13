@@ -10,6 +10,6 @@ public class SampleScene : MonoBehaviour
     {
         Debug.Log("start sample~");
         NativeBridge.Instance.Send("test 1");
-        NativeBridge.Instance.Send("test 2", (response) => { Debug.Log("from android : " + response); });
+        NativeBridge.Instance.Send("test 2", (response) => { Debug.Log("from native : " + response); });
     }
 }

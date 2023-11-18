@@ -13,6 +13,7 @@
     self->callback = bridgeCallback;
 }
 - (void)send:(NSString *)message{
+    NSLog(@"from unity message : %@", message);
     self->callback([message UTF8String]);
 }
 

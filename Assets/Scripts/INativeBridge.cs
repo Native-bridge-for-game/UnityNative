@@ -5,10 +5,13 @@ using UnityEngine;
 
 namespace PJ.Native
 {
+    public delegate void NativeMessageCallback(string message);
     public interface INativeBridge
     {
+        // NativeMessageCallback MessageCallback {get; set;}
+        void AddNativeMessageListener(NativeMessageCallback listener);
         void Send(string message);
-        void Send(string message, Action<string> onReceive);
+
     }
 }
 

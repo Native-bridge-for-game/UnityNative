@@ -9,7 +9,12 @@ public class SampleScene : MonoBehaviour
     void Start()
     {
         Debug.Log("start sample~");
+        NativeBridge.Instance.AddNativeMessageListener((message) =>
+        {
+            Debug.Log("from native : " + message); 
+        });
+
         NativeBridge.Instance.Send("test 1");
-        NativeBridge.Instance.Send("test 2", (response) => { Debug.Log("from native : " + response); });
+        NativeBridge.Instance.Send("test 2");
     }
 }

@@ -9,55 +9,45 @@ namespace PJ.Native
 {
     public class iOSBridge : INativeBridge
     {
-        private delegate void NativeBridgeCallback(string message, int nonce);
 
-        private static Action<string, int> nativeEvent;
+        private static Action<string> nativeEvent;
 
-        [MonoPInvokeCallback(typeof(NativeBridgeCallback))]
-        private static void OniOSEvent(string message, int nonce)
+        [MonoPInvokeCallback(typeof(NativeMessageCallback))]
+        private static void OniOSEvent(string message)
         {
-            Debug.Log("oniOSEvent : " + message + "  " + nonce);
-            nativeEvent?.Invoke(message, nonce);
+            Debug.Log("oniOSEvent : " + message + "  ");
+            nativeEvent?.Invoke(message);
         }
 
         [DllImport("__Internal")]
-        private static extern void __iOSInitialize(NativeBridgeCallback del);
+        private static extern void __iOSInitialize(NativeMessageCallback del);
 
         [DllImport("__Internal")]
-        private static extern void __iOSSend(string message, int nonce);
+        private static extern void __iOSSend(string message);
 
-        private int nonce = 0;
-        private int Nonce => nonce++;
+        private NativeMessageCallback messageCallback;
 
-        private Dictionary<int, Action<string>> dicRequest;
-
-        private void OnNativeEvent(string message, int nonce)
+        private void OnNativeEvent(string message)
         {
-            if(dicRequest.Remove(nonce, out Action<string> responce))
-            {
-                responce.Invoke(message);
-            }
+            messageCallback?.Invoke(message);
         }
 
         public iOSBridge()
         {
-            dicRequest = new Dictionary<int, Action<string>>();
             nativeEvent -= OnNativeEvent;
             nativeEvent += OnNativeEvent;
             __iOSInitialize(OniOSEvent);
         }
+        public void AddNativeMessageListener(NativeMessageCallback listener)
+        {
+            this.messageCallback -= listener;
+            this.messageCallback += listener;
+        }
 
         public void Send(string message)
         {
-            __iOSSend(message, -1);
+            __iOSSend(message);
         }
 
-        public void Send(string message, Action<string> onReceive)
-        {
-            int nonce = Nonce;
-            dicRequest.Add(nonce, onReceive);
-            __iOSSend(message, nonce);
-            
-        }
     }
 }

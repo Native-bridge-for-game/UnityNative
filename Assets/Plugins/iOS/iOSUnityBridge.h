@@ -10,14 +10,14 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (*NativeBridgeCallback)(const char* message);
+typedef void (*NativeMessageCallback)(const char* message);
 
 @interface iOSUnityBridge : NSObject
 {
-    NativeBridgeCallback callback;
+    NativeMessageCallback messageCallback;
 }
 
--(void) initializeWith : (NativeBridgeCallback) bridgeCallback;
+-(void) initializeWith : (NativeMessageCallback) bridgeCallback;
 -(void) send : (NSString*) message;
 @end
 

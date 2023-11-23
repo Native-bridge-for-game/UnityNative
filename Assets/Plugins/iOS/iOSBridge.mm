@@ -1,15 +1,11 @@
 #import <UIKit/UIKit.h>
 #import <iOSUnityBridge.h>
 
-//typedef void (*NativeBridgeCallback)(const char* message, int nonce);
-
-NativeBridgeCallback callback;
-
 iOSUnityBridge* unityBridge;
 
 extern "C"
 {
-    void __iOSInitialize(NativeBridgeCallback unityCallback)
+    void __iOSInitialize(NativeMessageCallback unityCallback)
     {
         unityBridge = [[iOSUnityBridge alloc] init];
         [unityBridge initializeWith:unityCallback];

@@ -17,15 +17,12 @@ public class NativeBridge{
 
     public void initialize(NativeBridgeCallback unityCallback){
         this.unityCallback = unityCallback;
+
+        this.unityCallback.onReceive("android native - init complete");
     }
 
     public void send(String message){
         Log.d("AndroidBridge", "android - java - message : " + message);
-    }
-
-    public void send(String message, int nonce){
-        message += " ~~~ from java ~~~";
-        Log.d("AndroidBridge", "android - java - message : " + message + " and return~~");
-        this.unityCallback.onReceive(message, nonce);
+        this.unityCallback.onReceive(message);
     }
 }

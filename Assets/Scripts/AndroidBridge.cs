@@ -7,25 +7,22 @@ namespace PJ.Native
 {
     public class AndroidBridgeProxy : AndroidJavaProxy
     {
-        public Action<string, int> NativeEvent;
+        public NativeMessageCallback MessageCallback;
 
         public AndroidBridgeProxy() : base("com.pj.nativecore.NativeBridgeCallback")
         {
             
         }
 
-        public void onReceive(string message, int nonce)
+        public void onReceive(string message)
         {
-            NativeEvent?.Invoke(message, nonce);
+            MessageCallback?.Invoke(message);
         }
     }
 
     public class AndroidBridge : INativeBridge 
     {
-        private Dictionary<int, Action<string>> dicRequest;
         private AndroidBridgeProxy androidBridgeProxy;
-        private int nonce = 0;
-        private int Nonce => nonce++;
 
         private Lazy<AndroidJavaObject> androidBridge = new Lazy<AndroidJavaObject>(()=>
         {
@@ -33,21 +30,16 @@ namespace PJ.Native
             return obj;
         }) ;
 
-        private void OnNativeEvent(string message, int nonce)
-        {
-            if(dicRequest.Remove(nonce, out Action<string> responce))
-            {
-                responce.Invoke(message);
-            }
-        }
-
         public AndroidBridge()
         {
-            dicRequest = new Dictionary<int, Action<string>>();
             androidBridgeProxy = new AndroidBridgeProxy();
-            androidBridgeProxy.NativeEvent -= OnNativeEvent;
-            androidBridgeProxy.NativeEvent += OnNativeEvent;
             androidBridge.Value.Call("initialize", androidBridgeProxy);
+        }
+
+        public void AddNativeMessageListener(NativeMessageCallback listener)
+        {
+            androidBridgeProxy.MessageCallback -= listener;
+            androidBridgeProxy.MessageCallback += listener;
         }
 
         public void Send(string message)
@@ -55,12 +47,6 @@ namespace PJ.Native
             androidBridge.Value.Call("send", message);           
         }
 
-        public void Send(string message, Action<string> onReceive)
-        {
-            int nonce = Nonce;
-            dicRequest.Add(nonce, onReceive);
-            androidBridge.Value.Call("send", message, nonce);
-        }
     }
     
 }

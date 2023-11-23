@@ -9,12 +9,13 @@
 #import <iOSUnityBridge.h>
 
 @implementation iOSUnityBridge
-- (void)initializeWith:(NativeBridgeCallback)bridgeCallback {
-    self->callback = bridgeCallback;
+- (void)initializeWith:(NativeMessageCallback)bridgeCallback {
+    self->messageCallback = bridgeCallback;
+    self->messageCallback("ios native - init complete");
 }
 - (void)send:(NSString *)message{
     NSLog(@"from unity message : %@", message);
-    self->callback([message UTF8String]);
+    self->messageCallback([message UTF8String]);
 }
 
 @end

@@ -25,9 +25,9 @@ namespace PJ.Native
             bridge?.Send(message);
         }
 
-        public void Send(string message, Action<string> onReceive)
+        public void AddNativeMessageListener(NativeMessageCallback listener)
         {
-            bridge?.Send(message, onReceive);
+            bridge.AddNativeMessageListener(listener);
         }
     }
 }

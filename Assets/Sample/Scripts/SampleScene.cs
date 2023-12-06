@@ -14,7 +14,8 @@ public class SampleScene : MonoBehaviour
             Debug.Log("from native : " + message); 
         });
 
-        NativeBridge.Instance.Send("test 1");
-        NativeBridge.Instance.Send("test 2");
+
+        NativeBridge.Instance.Send("test|first");
+        NativeBridge.Instance.Send("testRecall|second");
     }
 }

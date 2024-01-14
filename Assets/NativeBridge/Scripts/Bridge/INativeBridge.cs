@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PJ.Native
+namespace PJ.Native.Bridge
 {
     public delegate void NativeMessageCallback(string message);
     public interface INativeBridge

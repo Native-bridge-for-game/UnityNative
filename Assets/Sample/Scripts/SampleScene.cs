@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using PJ.Native;
+using PJ.Native.Bridge;
 using UnityEngine;
 
 public class SampleScene : MonoBehaviour

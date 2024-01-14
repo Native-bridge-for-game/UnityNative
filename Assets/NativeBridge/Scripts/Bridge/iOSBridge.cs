@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using AOT;
 using UnityEngine;
 
-namespace PJ.Native
+namespace PJ.Native.Bridge
 {
     public class iOSBridge : INativeBridge
     {

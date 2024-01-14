@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace PJ.Native
+namespace PJ.Native.Bridge
 {
     public class AndroidBridgeProxy : AndroidJavaProxy
     {

@@ -5,7 +5,7 @@ using PJ.Core.Util;
 using System;
 
 
-namespace PJ.Native
+namespace PJ.Native.Bridge
 {
     public class NativeBridge : Singleton<NativeBridge>, INativeBridge
     {

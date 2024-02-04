@@ -12,11 +12,17 @@ public class SampleKit
     {
         handler = new MessageHandler();
         handler.SetHandler("testReturn", OnTestReturn);
+        handler.SetHandler("native", OnNative);
     } 
 
     private void OnTestReturn(MessageHolder messageHolder)
     {
         Debug.Log("Unity... SampleNode : " + messageHolder.Message.Data);
+    }
+
+    private void OnNative(MessageHolder messageHolder)
+    {
+        Debug.Log("Unity... Native : " + messageHolder.Message.Data);
     }
 
     public void CallTest()

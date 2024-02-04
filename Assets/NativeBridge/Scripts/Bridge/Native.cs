@@ -5,16 +5,20 @@ using UnityEngine;
 
 namespace PJ.Native.Bridge
 {
-    public class NativeNode : AnyNode
+    public class Native
     {
-        public NativeNode()
+        private MessageCollector collector;
+
+        public Native()
         {
             NativeBridge.Instance.AddNativeMessageListener(OnReceiveFromNative);
+            collector = new MessageCollector();
+            collector.SetHandler(OnReceiveAny);
         }
 
         private void OnReceiveFromNative(string rawData)
         {
-            this.Notify(ToMessage(rawData));
+            collector.Notify(ToMessage(rawData));
         }
 
         private string ToRawData(Message message)
@@ -33,7 +37,7 @@ namespace PJ.Native.Bridge
             return message;
         }
 
-        public override void OnReceiveAny(MessageHolder messageHolder)
+        private void OnReceiveAny(MessageHolder messageHolder)
         {
             this.SendToNative(messageHolder.Message);
         }

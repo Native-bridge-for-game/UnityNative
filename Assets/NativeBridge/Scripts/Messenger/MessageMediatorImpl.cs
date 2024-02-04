@@ -7,51 +7,40 @@ namespace PJ.Native.Messenger
 {
     public class MessageMediatorImpl : MessageMediator
     {
-        private Dictionary<string, List<MessageNode>> receiverDict = new Dictionary<string, List<MessageNode>>();
-        private HashSet<MessageNode> receiverSet = new HashSet<MessageNode>();
+        private static string ReceiveAny = "$.ReceiveAny";
+        private Dictionary<string, List<MessageNode>> nodeFilter;
+        private Dictionary<int, MessageNode> nodeMap;
 
-        public void Add(MessageNode receiver)
+        public MessageMediatorImpl()
         {
-            List<string> messageTypes = receiver.GetReceivingMessageTypes();
-            if(messageTypes == null)
+            nodeFilter = new Dictionary<string, List<MessageNode>>()
             {
-                receiverSet.Add(receiver);
+                {ReceiveAny, new List<MessageNode>()}
+            };
+            nodeMap = new Dictionary<int, MessageNode>();
+        }
+
+        public void Register(MessageNode node)
+        {
+            nodeMap[node.ID] = node;
+        }
+
+        public void RegisterType(MessageNode node, string messageType)
+        {
+            if(nodeFilter.TryGetValue(messageType, out var list)){
+                list.Add(node);
             }
             else
-            {
-                foreach(var messageType in messageTypes)
-                {
-                    if(receiverDict.TryGetValue(messageType, out var list))
-                    {
-                        list.Add(receiver);
-                    }
-                    else
-                    {
-                        var newList = new List<MessageNode>();
-                        newList.Add(receiver);
-                        receiverDict[messageType] = newList;
-                    }
-                }
+            { 
+                var newList = new List<MessageNode>(){node};
+                nodeFilter[messageType] = newList;
             }
         }
 
-        public void Add(MessageNode receiver, string messageType)
+        public void Notify(Message message, Notifier notifier)
         {
-            if(receiverDict.TryGetValue(messageType, out var list)){
-                list.Add(receiver);
-            }
-            else
-            {
-                var newList = new List<MessageNode>();
-                newList.Add(receiver);
-                receiverDict[messageType] = newList;
-            }
-        }
-
-        public void Notify(Message message, MessageNode notifier)
-        {
-            MessageHolder holder = new MessagePostman(message, notifier);
-            if(receiverDict.TryGetValue(message.Type, out List<MessageNode> receivers))
+            MessageHolder holder = new MessagePostman(message, linkReceiver(notifier));
+            if(nodeFilter.TryGetValue(message.Type, out List<MessageNode> receivers))
             {
                 foreach(var receiver in receivers)
                 {
@@ -59,7 +48,7 @@ namespace PJ.Native.Messenger
                 }
             }
 
-            foreach(var receiver in receiverSet)
+            foreach(var receiver in nodeFilter[ReceiveAny])
             {
                 if(notifier != receiver)
                 {
@@ -68,13 +57,18 @@ namespace PJ.Native.Messenger
             }
         }
 
-        public void Notify(Message message, MessageNode notifier, MessageNode receiver)
+        public void Notify(Message message, Notifier notifier, Receivable receiver)
         {
-            MessageHolder holder = new MessagePostman(message, notifier);
+            MessageHolder holder = new MessagePostman(message, linkReceiver(notifier));
             receiver.OnReceive(holder);
         }
 
-        public void GiveBack(Message message, MessageNode giveBacked)
+        private Receivable linkReceiver(Notifier publisher)
+        {
+            return nodeMap[publisher.ID];
+        }
+
+        public void GiveBack(Message message, Receivable giveBacked)
         {
             MessageHolder holder = new MessagePostman(message);
             giveBacked.OnReceive(holder);

@@ -6,7 +6,7 @@
 	<dict>
 		<key>.DS_Store</key>
 		<data>
-		Ndzv2/EoSv5uxGh6F9fVsIkugUE=
+		zpLcSSnHIFjIdyvkYG+7qlIovlY=
 		</data>
 		<key>Headers/SampleKit-Swift.h</key>
 		<data>
@@ -22,7 +22,7 @@
 		</data>
 		<key>Modules/SampleKit.swiftmodule/Project/arm64-apple-ios.swiftsourceinfo</key>
 		<data>
-		BfMu4mc6mRO1YAWv4eIiHpwIWJw=
+		3g4EOCttFMpv9USOQUZQyuM7DrM=
 		</data>
 		<key>Modules/SampleKit.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
@@ -34,7 +34,7 @@
 		</data>
 		<key>Modules/SampleKit.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		f2RdpvAapdsDXrDR6SHuu3I+jCI=
+		7FOzEf+cMM+mUQTDYDK5H+lVRmw=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -61,7 +61,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			MmIZXwrMKmWLWhmyHrLtM3E8+9G1PGSmtVrDSxOoAq8=
+			EaaKVbQpslIsr1kimiHd7/Nf4gFgmD7HqNGoJaCxVGI=
 			</data>
 		</dict>
 		<key>Modules/SampleKit.swiftmodule/arm64-apple-ios.abi.json</key>
@@ -82,7 +82,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			qhn0Drm01C9N5DU+3GSAeSRwZWS0kCMmqzCinz9T500=
+			0b+ezhu1lMQ2Z2UpQahGjHh4GPDAIhd/b1ixoCsEQsw=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

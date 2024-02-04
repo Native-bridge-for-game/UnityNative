@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using PJ.Native.Messenger;
 using UnityEngine;
 
-public interface MessageMediator
+namespace PJ.Native.Messenger
 {
-    void Add(MessageNode receiver);
-    void Add(MessageNode receiver, string messageType);
-    void Notify(Message message, MessageNode notifier);
-    void Notify(Message message, MessageNode notifier, MessageNode receiver);
-    void GiveBack(Message message, MessageNode giveBacked);
+    public interface MessageMediator
+    {
+        void Register(MessageNode node);
+        void RegisterType(MessageNode node, string messageType);
+        void Notify(Message message, Notifier notifier);
+        void Notify(Message message, Notifier notifier, Receivable receiver);
+        void GiveBack(Message message, Receivable giveBacked);
+    }
+
 }

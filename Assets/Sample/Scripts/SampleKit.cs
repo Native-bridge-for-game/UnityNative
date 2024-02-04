@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using PJ.Native.Messenger;
 using UnityEngine;
 
-public class SampleNode : FilterNode
+public class SampleKit
 {
-    protected override Dictionary<string, Action<MessageHolder>> OnInitialize()
+    private MessageHandler handler;
+
+    public SampleKit()
     {
-        return new Dictionary<string, Action<MessageHolder>>
-        {
-            {"testReturn", OnTestReturn}
-        };
-    }
+        handler = new MessageHandler();
+        handler.SetHandler("testReturn", OnTestReturn);
+    } 
 
     private void OnTestReturn(MessageHolder messageHolder)
     {
@@ -24,10 +24,10 @@ public class SampleNode : FilterNode
         Message message1 = new Message();
         message1.Type = "test";
         message1.Data = "first";
-        this.Notify(message1);
+        handler.Notify(message1);
         Message message2 = new Message();
         message2.Type = "testRecall";
         message2.Data = "second";
-        this.Notify(message2);
+        handler.Notify(message2);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,66 +8,32 @@ namespace PJ.Native.Messenger
 {
     public class MessageMediatorImpl : MessageMediator
     {
-        private static string ReceiveAny = "$.ReceiveAny";
-        private Dictionary<string, List<MessageNode>> nodeFilter;
-        private Dictionary<int, MessageNode> nodeMap;
+        private Dictionary<int, MessageNode> idFilter;
 
         public MessageMediatorImpl()
         {
-            nodeFilter = new Dictionary<string, List<MessageNode>>()
-            {
-                {ReceiveAny, new List<MessageNode>()}
-            };
-            nodeMap = new Dictionary<int, MessageNode>();
+            idFilter = new Dictionary<int, MessageNode>();
         }
 
         public void Register(MessageNode node)
         {
-            nodeMap[node.ID] = node;
+            idFilter[node.ID] = node;
         }
 
-        public void RegisterType(MessageNode node, string messageType)
-        {
-            if(nodeFilter.TryGetValue(messageType, out var list)){
-                list.Add(node);
-            }
-            else
-            { 
-                var newList = new List<MessageNode>(){node};
-                nodeFilter[messageType] = newList;
-            }
-        }
-
-        public void Notify(Message message, Notifier notifier)
+        public void Notify(Message message, Tag tag, Notifier notifier)
         {
             MessageHolder holder = new MessagePostman(message, linkReceiver(notifier));
-            if(nodeFilter.TryGetValue(message.Type, out List<MessageNode> receivers))
+            foreach(var node in idFilter.Values.Where(node => node.Tag.Contains(tag)))
             {
-                foreach(var receiver in receivers)
-                {
-                    receiver.OnReceive(holder);
-                }
+                if(node.HasKey(message.Key) && notifier.ID != node.ID)
+                    node.OnReceive(holder);
             }
-
-            foreach(var receiver in nodeFilter[ReceiveAny])
-            {
-                if(notifier != receiver)
-                {
-                    receiver.OnReceive(holder);
-                }
-            }
-        }
-
-        public void Notify(Message message, Notifier notifier, Receivable receiver)
-        {
-            MessageHolder holder = new MessagePostman(message, linkReceiver(notifier));
-            receiver.OnReceive(holder);
         }
 
         private Receivable linkReceiver(Notifier publisher)
         {
-            return nodeMap[publisher.ID];
-        }
+            return idFilter[publisher.ID];
+        } 
 
         public void GiveBack(Message message, Receivable giveBacked)
         {

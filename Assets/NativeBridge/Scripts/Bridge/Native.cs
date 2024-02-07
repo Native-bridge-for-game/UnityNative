@@ -12,28 +12,24 @@ namespace PJ.Native.Bridge
         public Native()
         {
             NativeBridge.Instance.AddNativeMessageListener(OnReceiveFromNative);
-            collector = new MessageCollector();
+            collector = new MessageCollector(Tag.Native);
             collector.SetHandler(OnReceiveAny);
         }
 
         private void OnReceiveFromNative(string rawData)
         {
-            collector.Notify(ToMessage(rawData));
+            collector.Notify(ToMessage(rawData), Tag.Game);
         }
 
         private string ToRawData(Message message)
         {
-            return $"{message.Type}|{message.Data}";
+            return $"{message.Key}|{message.Data}";
         }
 
         private Message ToMessage(string rawData)
         {
             var splited = rawData.Split('|');
-            Message message = new Message
-            {
-                Type = splited[0], 
-                Data = splited[1]
-            };
+            Message message = new Message(splited[0], splited[1]); // (Key, Data)
             return message;
         }
 

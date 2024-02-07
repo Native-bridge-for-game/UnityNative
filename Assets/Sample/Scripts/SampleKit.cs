@@ -10,7 +10,7 @@ public class SampleKit
 
     public SampleKit()
     {
-        handler = new MessageHandler();
+        handler = new MessageHandler(Tag.Game);
         handler.SetHandler("testReturn", OnTestReturn);
         handler.SetHandler("native", OnNative);
     } 
@@ -27,13 +27,9 @@ public class SampleKit
 
     public void CallTest()
     {
-        Message message1 = new Message();
-        message1.Type = "test";
-        message1.Data = "first";
-        handler.Notify(message1);
-        Message message2 = new Message();
-        message2.Type = "testRecall";
-        message2.Data = "second";
-        handler.Notify(message2);
+        Message message1 = new Message("test", "first");
+        handler.Notify(message1, Tag.Native);
+        Message message2 = new Message("testRecall", "second");
+        handler.Notify(message2, Tag.Native);
     }
 }

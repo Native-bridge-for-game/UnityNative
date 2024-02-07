@@ -7,13 +7,16 @@ namespace PJ.Native.Messenger
 {
     public sealed class MessageCollector : MessageNode
     {
-        private static string ReceiveAny = "$.ReceiveAny";
         private Action<MessageHolder> handler;
 
-        public MessageCollector()
+        public MessageCollector(Tag tag) : base(tag)
         {
             MessageManager.Instance.Mediator.Register(this);
-            MessageManager.Instance.Mediator.RegisterType(this, ReceiveAny);
+        }
+
+        public override bool HasKey(string key)
+        {
+            return true;
         }
 
         public override void OnReceive(MessageHolder messageHolder)

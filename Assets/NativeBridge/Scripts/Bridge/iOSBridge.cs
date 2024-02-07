@@ -16,7 +16,6 @@ namespace PJ.Native.Bridge
         [MonoPInvokeCallback(typeof(NativeMessageCallback))]
         private static void OniOSEvent(string message)
         {
-            Debug.Log("oniOSEvent : " + message + "  ");
             nativeEvent?.Invoke(message);
         }
 

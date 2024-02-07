@@ -10,31 +10,28 @@ namespace PJ.Native.Messenger
     {
         private Dictionary<string, Action<MessageHolder>> handlerMap;
 
-        public MessageHandler()
+        public MessageHandler(Tag tag) : base(tag)
         {
             MessageManager.Instance.Mediator.Register(this);
             handlerMap = new Dictionary<string, Action<MessageHolder>>();
         }
 
+        public override bool HasKey(string key)
+        {
+            return handlerMap.ContainsKey(key);
+        }
+
         public override void OnReceive(MessageHolder messageHolder)
         {
-            if(handlerMap.TryGetValue(messageHolder.Message.Type, out Action<MessageHolder> handler))
+            if(handlerMap.TryGetValue(messageHolder.Message.Key, out Action<MessageHolder> handler))
             {
                 handler.Invoke(messageHolder);
             }
         }
 
-        public void SetHandler(string messageType, Action<MessageHolder> handler)
+        public void SetHandler(string key, Action<MessageHolder> handler)
         {
-            if(handlerMap.ContainsKey(messageType))
-            {
-                handlerMap[messageType] += handler;
-            }
-            else
-            {
-                handlerMap.Add(messageType, handler);
-            }
-            MessageManager.Instance.Mediator.RegisterType(this, messageType);
+            handlerMap[key] = handler;
         }
     }
 }

@@ -7,6 +7,7 @@ namespace PJ.Native.Messenger
 {
     public interface Receivable
     {
+        bool HasKey(string key);
         void OnReceive(MessageHolder messageHolder);
     }
 
@@ -20,22 +21,29 @@ namespace PJ.Native.Messenger
                 return id++;
             }
         }
-
+        private Tag tag;
+        public Tag Tag => tag;
         public int ID = IDCounter.GetID();
 
-        public void Notify(Message message)
+        public Notifier(Tag tag)
         {
-            MessageManager.Instance.Mediator.Notify(message, this);
+            this.tag = tag;
         }
 
-        public void Notify(Message message, Receivable receiver)
+        public void Notify(Message message, Tag tag)
         {
-            MessageManager.Instance.Mediator.Notify(message, this, receiver);
+            MessageManager.Instance.Mediator.Notify(message, tag, this);
         }
     }
     
     public abstract class MessageNode : Notifier, Receivable
     {
+        public MessageNode(Tag tag) : base(tag)
+        {
+        }
+
+        public abstract bool HasKey(string key);
+
         public abstract void OnReceive(MessageHolder messageHolder);   
     }
 }

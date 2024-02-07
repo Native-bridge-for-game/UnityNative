@@ -13,10 +13,12 @@ namespace PJ.Native.Bridge
 
         protected override void Initialize()
         {
-#if UNITY_ANDROID 
+#if UNITY_ANDROID && !UNITY_EDITOR
             bridge = new AndroidBridge();
-#elif UNITY_IOS
+#elif UNITY_IOS && !UNITY_EDITOR
             bridge = new iOSBridge();
+#else
+            bridge = new EditorBridge();
 #endif 
         }
     

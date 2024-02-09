@@ -1,20 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using PJ.Core.Util;
 using PJ.Native.Messenger;
 using UnityEngine;
 
 namespace PJ.Native.Bridge
 {
-    public class Native
+    public class Native : Singleton<Native>
     {
+        private INativeBridge bridge;
         private MessageCollector collector;
-
-        public Native()
-        {
-            NativeBridge.Instance.AddNativeMessageListener(OnReceiveFromNative);
-            collector = new MessageCollector(Tag.Native);
-            collector.SetHandler(OnReceiveAny);
-        }
 
         private void OnReceiveFromNative(string rawData)
         {
@@ -33,18 +28,23 @@ namespace PJ.Native.Bridge
             return message;
         }
 
-        private void OnReceiveAny(MessageHolder messageHolder)
+        private void OnReceiveFromNative(MessageHolder messageHolder)
         {
             this.SendToNative(messageHolder.Message);
         }
 
         private void SendToNative(Message message)
         {
-            NativeBridge.Instance.Send(ToRawData(message));
+            bridge.Send(ToRawData(message));
         }
 
-        
-        
+        internal void Start()
+        {
+            bridge = new NativeBridge();
+            bridge.AddNativeMessageListener(OnReceiveFromNative);
+            collector = new MessageCollector(Tag.Native);
+            collector.SetHandler(OnReceiveFromNative);
+        }
     }
 
 }

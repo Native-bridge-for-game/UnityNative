@@ -7,11 +7,11 @@ using System;
 
 namespace PJ.Native.Bridge
 {
-    public class NativeBridge : Singleton<NativeBridge>, INativeBridge
+    public class NativeBridge : INativeBridge
     {
         private INativeBridge bridge;
 
-        protected override void Initialize()
+        public NativeBridge()
         {
 #if UNITY_ANDROID && !UNITY_EDITOR
             bridge = new AndroidBridge();

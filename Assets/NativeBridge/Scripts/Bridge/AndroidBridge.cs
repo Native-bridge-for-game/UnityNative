@@ -8,16 +8,16 @@ namespace PJ.Native.Bridge
 {
     public class AndroidBridgeProxy : AndroidJavaProxy
     {
-        public NativeMessageCallback MessageCallback;
+        public NativeDataCallback DataCallback;
 
         public AndroidBridgeProxy() : base("com.pj.core.unity.NativeBridgeCallback")
         {
             
         }
 
-        public void onReceive(string message)
+        public void onReceive(byte[] data)
         {
-            MessageCallback?.Invoke(message);
+            DataCallback?.Invoke(data);
         }
     }
 
@@ -37,15 +37,15 @@ namespace PJ.Native.Bridge
             androidBridge.Value.Call("initialize", androidBridgeProxy);
         }
 
-        public void AddNativeMessageListener(NativeMessageCallback listener)
+        public void SetNativeDataListener(NativeDataCallback listener)
         {
-            androidBridgeProxy.MessageCallback -= listener;
-            androidBridgeProxy.MessageCallback += listener;
+            androidBridgeProxy.DataCallback -= listener;
+            androidBridgeProxy.DataCallback -= listener;
         }
 
-        public void Send(string message)
+        public void Send(byte[] data)
         {
-            androidBridge.Value.Call("send", message);           
+            androidBridge.Value.Call("send", data);
         }
 
     }

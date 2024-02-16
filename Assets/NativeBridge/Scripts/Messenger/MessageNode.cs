@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Sockets;
+using PJ.Native.Proto;
 using UnityEngine;
 
 namespace PJ.Native.Messenger

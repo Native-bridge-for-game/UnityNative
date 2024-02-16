@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using PJ.Native.Bridge;
 using PJ.Native.Messenger;
+using PJ.Native.Proto;
 using UnityEngine;
 
 public class SampleScene : MonoBehaviour
@@ -10,6 +12,6 @@ public class SampleScene : MonoBehaviour
     void Start()
     {
         SampleKit sample = new SampleKit();
-        sample.CallTest();
+        sample.CallTest();  
     }
 }

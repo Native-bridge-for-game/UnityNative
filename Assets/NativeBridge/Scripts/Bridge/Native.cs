@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Google.Protobuf;
 using PJ.Core.Util;
 using PJ.Native.Messenger;
+using PJ.Native.Proto;
 using UnityEngine;
 
 namespace PJ.Native.Bridge
@@ -11,21 +13,20 @@ namespace PJ.Native.Bridge
         private INativeBridge bridge;
         private MessageCollector collector;
 
-        private void OnReceiveFromNative(string rawData)
+        private void OnReceiveFromNative(byte[] rawData)
         {
             collector.Notify(ToMessage(rawData), Tag.Game);
         }
 
-        private string ToRawData(Message message)
+        private byte[] ToRawData(Message message)
         {
-            return $"{message.Key}|{message.Data}";
+            return message.ToByteArray();
         }
 
-        private Message ToMessage(string rawData)
+        private Message ToMessage(byte[] rawData)
         {
-            var splited = rawData.Split('|');
-            Message message = new Message(splited[0], splited[1]); // (Key, Data)
-            return message;
+            var parsed = Message.Parser.ParseFrom(rawData);
+            return parsed;
         }
 
         private void OnReceiveFromNative(MessageHolder messageHolder)
@@ -41,7 +42,7 @@ namespace PJ.Native.Bridge
         internal void Start()
         {
             bridge = new NativeBridge();
-            bridge.AddNativeMessageListener(OnReceiveFromNative);
+            bridge.SetNativeDataListener(OnReceiveFromNative);
             collector = new MessageCollector(Tag.Native);
             collector.SetHandler(OnReceiveFromNative);
         }

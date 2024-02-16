@@ -6,14 +6,16 @@ namespace PJ.Native.Bridge
 {
     public class EditorBridge : INativeBridge
     {
-        public void AddNativeMessageListener(NativeMessageCallback listener)
+        private NativeDataCallback callback;
+        public void SetNativeDataListener(NativeDataCallback listener)
         {
-            
+            callback -= listener;
+            callback += listener;
         }
 
-        public void Send(string message)
+        public void Send(byte[] data)
         {
-            
+            callback?.Invoke(data);
         }
     }
 }

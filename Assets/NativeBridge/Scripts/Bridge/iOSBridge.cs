@@ -10,43 +10,37 @@ namespace PJ.Native.Bridge
 {
     public class iOSBridge : INativeBridge
     {
-
-        private static Action<string> nativeEvent;
-
-        [MonoPInvokeCallback(typeof(NativeMessageCallback))]
-        private static void OniOSEvent(string message)
+        private delegate void ObjcDataCallback(IntPtr ptr, int length);
+        private static NativeDataCallback dataCallback;
+        [MonoPInvokeCallback(typeof(ObjcDataCallback))]
+        private static void OniOSEvent(IntPtr ptr, int length)
         {
-            nativeEvent?.Invoke(message);
+            byte[] data = new byte[length];
+            Marshal.Copy(ptr, data, 0, length);
+            dataCallback?.Invoke(data);
         }
 
         [DllImport("__Internal")]
-        private static extern void __iOSInitialize(NativeMessageCallback del);
-
+        private static extern void __iOSInitialize(ObjcDataCallback del);
         [DllImport("__Internal")]
-        private static extern void __iOSSend(string message);
-
-        private NativeMessageCallback messageCallback;
-
-        private void OnNativeEvent(string message)
-        {
-            messageCallback?.Invoke(message);
-        }
+        private static extern void __iOSSend(IntPtr data, int length);
 
         public iOSBridge()
         {
-            nativeEvent -= OnNativeEvent;
-            nativeEvent += OnNativeEvent;
             __iOSInitialize(OniOSEvent);
         }
-        public void AddNativeMessageListener(NativeMessageCallback listener)
+
+        public void SetNativeDataListener(NativeDataCallback listener)
         {
-            this.messageCallback -= listener;
-            this.messageCallback += listener;
+            dataCallback -= listener;
+            dataCallback += listener;
         }
 
-        public void Send(string message)
+        public void Send(byte[] data)
         {
-            __iOSSend(message);
+            GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
+            __iOSSend(handle.AddrOfPinnedObject(), data.Length);
+            handle.Free();
         }
 
     }

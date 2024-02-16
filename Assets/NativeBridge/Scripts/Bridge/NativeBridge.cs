@@ -1,9 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using PJ.Core.Util;
-using System;
-
 
 namespace PJ.Native.Bridge
 {
@@ -21,15 +15,16 @@ namespace PJ.Native.Bridge
             bridge = new EditorBridge();
 #endif 
         }
-    
-        public void Send(string message)
+
+        public void SetNativeDataListener(NativeDataCallback listener)
         {
-            bridge?.Send(message);
+            bridge?.SetNativeDataListener(listener);
+        }
+    
+        public void Send(byte[] data)
+        {
+            bridge?.Send(data);
         }
 
-        public void AddNativeMessageListener(NativeMessageCallback listener)
-        {
-            bridge.AddNativeMessageListener(listener);
-        }
     }
 }

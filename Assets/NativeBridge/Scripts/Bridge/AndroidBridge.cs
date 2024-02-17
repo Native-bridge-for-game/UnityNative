@@ -1,6 +1,7 @@
 #if UNITY_ANDROID
 using System;
 using System.Collections.Generic;
+using Google.Protobuf.WellKnownTypes;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -15,9 +16,14 @@ namespace PJ.Native.Bridge
             
         }
 
-        public void onReceive(byte[] data)
+        public void onReceive(sbyte[] sbytes)
         {
-            DataCallback?.Invoke(data);
+            byte[] bytes = new byte[sbytes.Length];
+            for (int i = 0; i < sbytes.Length; i++)
+            {
+                bytes[i] = (byte) sbytes[i];
+            }
+            DataCallback?.Invoke(bytes);
         }
     }
 
@@ -40,12 +46,17 @@ namespace PJ.Native.Bridge
         public void SetNativeDataListener(NativeDataCallback listener)
         {
             androidBridgeProxy.DataCallback -= listener;
-            androidBridgeProxy.DataCallback -= listener;
+            androidBridgeProxy.DataCallback += listener;
         }
 
         public void Send(byte[] data)
         {
-            androidBridge.Value.Call("send", data);
+            sbyte[] sbytes = new sbyte[data.Length];
+            for (int i = 0; i < data.Length; i++)
+            {
+                sbytes[i] = (sbyte) data[i];
+            }
+            androidBridge.Value.Call("send", sbytes);
         }
 
     }

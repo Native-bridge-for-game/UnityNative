@@ -25,26 +25,26 @@ namespace PJ.Native.Proto {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
             "ChJuYXRpdmVCcmlkZ2UucHJvdG8iNQoHTWVzc2FnZRILCgNrZXkYASABKAkS",
-            "HQoJY29udGFpbmVyGAIgASgLMgouQ29udGFpbmVyIssECglDb250YWluZXIS",
-            "KAoHYm9vbE1hcBgBIAMoCzIXLkNvbnRhaW5lci5Cb29sTWFwRW50cnkSJgoG",
-            "aW50TWFwGAIgAygLMhYuQ29udGFpbmVyLkludE1hcEVudHJ5EioKCGZsb2F0",
-            "TWFwGAMgAygLMhguQ29udGFpbmVyLkZsb2F0TWFwRW50cnkSLAoJc3RyaW5n",
-            "TWFwGAQgAygLMhkuQ29udGFpbmVyLlN0cmluZ01hcEVudHJ5EioKCGJ5dGVz",
-            "TWFwGAUgAygLMhguQ29udGFpbmVyLkJ5dGVzTWFwRW50cnkSMgoMY29udGFp",
-            "bmVyTWFwGAYgAygLMhwuQ29udGFpbmVyLkNvbnRhaW5lck1hcEVudHJ5Gi4K",
-            "DEJvb2xNYXBFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAg6AjgB",
-            "Gi0KC0ludE1hcEVudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoBToC",
-            "OAEaLwoNRmxvYXRNYXBFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiAB",
-            "KAI6AjgBGjAKDlN0cmluZ01hcEVudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1",
-            "ZRgCIAEoCToCOAEaLwoNQnl0ZXNNYXBFbnRyeRILCgNrZXkYASABKAkSDQoF",
-            "dmFsdWUYAiABKAw6AjgBGj8KEUNvbnRhaW5lck1hcEVudHJ5EgsKA2tleRgB",
-            "IAEoCRIZCgV2YWx1ZRgCIAEoCzIKLkNvbnRhaW5lcjoCOAFCEqoCD1BKLk5h",
-            "dGl2ZS5Qcm90b2IGcHJvdG8z"));
+            "HQoJY29udGFpbmVyGAIgASgLMgouQ29udGFpbmVyIrkECglDb250YWluZXIS",
+            "KgoIYm9vbGVhbnMYASADKAsyGC5Db250YWluZXIuQm9vbGVhbnNFbnRyeRIq",
+            "CghpbnRlZ2VycxgCIAMoCzIYLkNvbnRhaW5lci5JbnRlZ2Vyc0VudHJ5EiYK",
+            "BmZsb2F0cxgDIAMoCzIWLkNvbnRhaW5lci5GbG9hdHNFbnRyeRIoCgdzdHJp",
+            "bmdzGAQgAygLMhcuQ29udGFpbmVyLlN0cmluZ3NFbnRyeRIkCgVieXRlcxgF",
+            "IAMoCzIVLkNvbnRhaW5lci5CeXRlc0VudHJ5Ei4KCmNvbnRhaW5lcnMYBiAD",
+            "KAsyGi5Db250YWluZXIuQ29udGFpbmVyc0VudHJ5Gi8KDUJvb2xlYW5zRW50",
+            "cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgIOgI4ARovCg1JbnRlZ2Vy",
+            "c0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoBToCOAEaLQoLRmxv",
+            "YXRzRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgCOgI4ARouCgxT",
+            "dHJpbmdzRW50cnkSCwoDa2V5GAEgASgJEg0KBXZhbHVlGAIgASgJOgI4ARos",
+            "CgpCeXRlc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoDDoCOAEa",
+            "PQoPQ29udGFpbmVyc0VudHJ5EgsKA2tleRgBIAEoCRIZCgV2YWx1ZRgCIAEo",
+            "CzIKLkNvbnRhaW5lcjoCOAFCJQoRY29tLnBqLmNvcmUucHJvdG+qAg9QSi5O",
+            "YXRpdmUuUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::PJ.Native.Proto.Message), global::PJ.Native.Proto.Message.Parser, new[]{ "Key", "Container" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::PJ.Native.Proto.Container), global::PJ.Native.Proto.Container.Parser, new[]{ "BoolMap", "IntMap", "FloatMap", "StringMap", "BytesMap", "ContainerMap" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, null, null, null, })
+            new pbr::GeneratedClrTypeInfo(typeof(global::PJ.Native.Proto.Container), global::PJ.Native.Proto.Container.Parser, new[]{ "Booleans", "Integers", "Floats", "Strings", "Bytes", "Containers" }, null, null, null, new pbr::GeneratedClrTypeInfo[] { null, null, null, null, null, null, })
           }));
     }
     #endregion
@@ -322,12 +322,12 @@ namespace PJ.Native.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public Container(Container other) : this() {
-      boolMap_ = other.boolMap_.Clone();
-      intMap_ = other.intMap_.Clone();
-      floatMap_ = other.floatMap_.Clone();
-      stringMap_ = other.stringMap_.Clone();
-      bytesMap_ = other.bytesMap_.Clone();
-      containerMap_ = other.containerMap_.Clone();
+      booleans_ = other.booleans_.Clone();
+      integers_ = other.integers_.Clone();
+      floats_ = other.floats_.Clone();
+      strings_ = other.strings_.Clone();
+      bytes_ = other.bytes_.Clone();
+      containers_ = other.containers_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -337,70 +337,70 @@ namespace PJ.Native.Proto {
       return new Container(this);
     }
 
-    /// <summary>Field number for the "boolMap" field.</summary>
-    public const int BoolMapFieldNumber = 1;
-    private static readonly pbc::MapField<string, bool>.Codec _map_boolMap_codec
+    /// <summary>Field number for the "booleans" field.</summary>
+    public const int BooleansFieldNumber = 1;
+    private static readonly pbc::MapField<string, bool>.Codec _map_booleans_codec
         = new pbc::MapField<string, bool>.Codec(pb::FieldCodec.ForString(10, ""), pb::FieldCodec.ForBool(16, false), 10);
-    private readonly pbc::MapField<string, bool> boolMap_ = new pbc::MapField<string, bool>();
+    private readonly pbc::MapField<string, bool> booleans_ = new pbc::MapField<string, bool>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::MapField<string, bool> BoolMap {
-      get { return boolMap_; }
+    public pbc::MapField<string, bool> Booleans {
+      get { return booleans_; }
     }
 
-    /// <summary>Field number for the "intMap" field.</summary>
-    public const int IntMapFieldNumber = 2;
-    private static readonly pbc::MapField<string, int>.Codec _map_intMap_codec
+    /// <summary>Field number for the "integers" field.</summary>
+    public const int IntegersFieldNumber = 2;
+    private static readonly pbc::MapField<string, int>.Codec _map_integers_codec
         = new pbc::MapField<string, int>.Codec(pb::FieldCodec.ForString(10, ""), pb::FieldCodec.ForInt32(16, 0), 18);
-    private readonly pbc::MapField<string, int> intMap_ = new pbc::MapField<string, int>();
+    private readonly pbc::MapField<string, int> integers_ = new pbc::MapField<string, int>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::MapField<string, int> IntMap {
-      get { return intMap_; }
+    public pbc::MapField<string, int> Integers {
+      get { return integers_; }
     }
 
-    /// <summary>Field number for the "floatMap" field.</summary>
-    public const int FloatMapFieldNumber = 3;
-    private static readonly pbc::MapField<string, float>.Codec _map_floatMap_codec
+    /// <summary>Field number for the "floats" field.</summary>
+    public const int FloatsFieldNumber = 3;
+    private static readonly pbc::MapField<string, float>.Codec _map_floats_codec
         = new pbc::MapField<string, float>.Codec(pb::FieldCodec.ForString(10, ""), pb::FieldCodec.ForFloat(21, 0F), 26);
-    private readonly pbc::MapField<string, float> floatMap_ = new pbc::MapField<string, float>();
+    private readonly pbc::MapField<string, float> floats_ = new pbc::MapField<string, float>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::MapField<string, float> FloatMap {
-      get { return floatMap_; }
+    public pbc::MapField<string, float> Floats {
+      get { return floats_; }
     }
 
-    /// <summary>Field number for the "stringMap" field.</summary>
-    public const int StringMapFieldNumber = 4;
-    private static readonly pbc::MapField<string, string>.Codec _map_stringMap_codec
+    /// <summary>Field number for the "strings" field.</summary>
+    public const int StringsFieldNumber = 4;
+    private static readonly pbc::MapField<string, string>.Codec _map_strings_codec
         = new pbc::MapField<string, string>.Codec(pb::FieldCodec.ForString(10, ""), pb::FieldCodec.ForString(18, ""), 34);
-    private readonly pbc::MapField<string, string> stringMap_ = new pbc::MapField<string, string>();
+    private readonly pbc::MapField<string, string> strings_ = new pbc::MapField<string, string>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::MapField<string, string> StringMap {
-      get { return stringMap_; }
+    public pbc::MapField<string, string> Strings {
+      get { return strings_; }
     }
 
-    /// <summary>Field number for the "bytesMap" field.</summary>
-    public const int BytesMapFieldNumber = 5;
-    private static readonly pbc::MapField<string, pb::ByteString>.Codec _map_bytesMap_codec
+    /// <summary>Field number for the "bytes" field.</summary>
+    public const int BytesFieldNumber = 5;
+    private static readonly pbc::MapField<string, pb::ByteString>.Codec _map_bytes_codec
         = new pbc::MapField<string, pb::ByteString>.Codec(pb::FieldCodec.ForString(10, ""), pb::FieldCodec.ForBytes(18, pb::ByteString.Empty), 42);
-    private readonly pbc::MapField<string, pb::ByteString> bytesMap_ = new pbc::MapField<string, pb::ByteString>();
+    private readonly pbc::MapField<string, pb::ByteString> bytes_ = new pbc::MapField<string, pb::ByteString>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::MapField<string, pb::ByteString> BytesMap {
-      get { return bytesMap_; }
+    public pbc::MapField<string, pb::ByteString> Bytes {
+      get { return bytes_; }
     }
 
-    /// <summary>Field number for the "containerMap" field.</summary>
-    public const int ContainerMapFieldNumber = 6;
-    private static readonly pbc::MapField<string, global::PJ.Native.Proto.Container>.Codec _map_containerMap_codec
+    /// <summary>Field number for the "containers" field.</summary>
+    public const int ContainersFieldNumber = 6;
+    private static readonly pbc::MapField<string, global::PJ.Native.Proto.Container>.Codec _map_containers_codec
         = new pbc::MapField<string, global::PJ.Native.Proto.Container>.Codec(pb::FieldCodec.ForString(10, ""), pb::FieldCodec.ForMessage(18, global::PJ.Native.Proto.Container.Parser), 50);
-    private readonly pbc::MapField<string, global::PJ.Native.Proto.Container> containerMap_ = new pbc::MapField<string, global::PJ.Native.Proto.Container>();
+    private readonly pbc::MapField<string, global::PJ.Native.Proto.Container> containers_ = new pbc::MapField<string, global::PJ.Native.Proto.Container>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public pbc::MapField<string, global::PJ.Native.Proto.Container> ContainerMap {
-      get { return containerMap_; }
+    public pbc::MapField<string, global::PJ.Native.Proto.Container> Containers {
+      get { return containers_; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -418,12 +418,12 @@ namespace PJ.Native.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!BoolMap.Equals(other.BoolMap)) return false;
-      if (!IntMap.Equals(other.IntMap)) return false;
-      if (!FloatMap.Equals(other.FloatMap)) return false;
-      if (!StringMap.Equals(other.StringMap)) return false;
-      if (!BytesMap.Equals(other.BytesMap)) return false;
-      if (!ContainerMap.Equals(other.ContainerMap)) return false;
+      if (!Booleans.Equals(other.Booleans)) return false;
+      if (!Integers.Equals(other.Integers)) return false;
+      if (!Floats.Equals(other.Floats)) return false;
+      if (!Strings.Equals(other.Strings)) return false;
+      if (!Bytes.Equals(other.Bytes)) return false;
+      if (!Containers.Equals(other.Containers)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -431,12 +431,12 @@ namespace PJ.Native.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      hash ^= BoolMap.GetHashCode();
-      hash ^= IntMap.GetHashCode();
-      hash ^= FloatMap.GetHashCode();
-      hash ^= StringMap.GetHashCode();
-      hash ^= BytesMap.GetHashCode();
-      hash ^= ContainerMap.GetHashCode();
+      hash ^= Booleans.GetHashCode();
+      hash ^= Integers.GetHashCode();
+      hash ^= Floats.GetHashCode();
+      hash ^= Strings.GetHashCode();
+      hash ^= Bytes.GetHashCode();
+      hash ^= Containers.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -455,12 +455,12 @@ namespace PJ.Native.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      boolMap_.WriteTo(output, _map_boolMap_codec);
-      intMap_.WriteTo(output, _map_intMap_codec);
-      floatMap_.WriteTo(output, _map_floatMap_codec);
-      stringMap_.WriteTo(output, _map_stringMap_codec);
-      bytesMap_.WriteTo(output, _map_bytesMap_codec);
-      containerMap_.WriteTo(output, _map_containerMap_codec);
+      booleans_.WriteTo(output, _map_booleans_codec);
+      integers_.WriteTo(output, _map_integers_codec);
+      floats_.WriteTo(output, _map_floats_codec);
+      strings_.WriteTo(output, _map_strings_codec);
+      bytes_.WriteTo(output, _map_bytes_codec);
+      containers_.WriteTo(output, _map_containers_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -471,12 +471,12 @@ namespace PJ.Native.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      boolMap_.WriteTo(ref output, _map_boolMap_codec);
-      intMap_.WriteTo(ref output, _map_intMap_codec);
-      floatMap_.WriteTo(ref output, _map_floatMap_codec);
-      stringMap_.WriteTo(ref output, _map_stringMap_codec);
-      bytesMap_.WriteTo(ref output, _map_bytesMap_codec);
-      containerMap_.WriteTo(ref output, _map_containerMap_codec);
+      booleans_.WriteTo(ref output, _map_booleans_codec);
+      integers_.WriteTo(ref output, _map_integers_codec);
+      floats_.WriteTo(ref output, _map_floats_codec);
+      strings_.WriteTo(ref output, _map_strings_codec);
+      bytes_.WriteTo(ref output, _map_bytes_codec);
+      containers_.WriteTo(ref output, _map_containers_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -487,12 +487,12 @@ namespace PJ.Native.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      size += boolMap_.CalculateSize(_map_boolMap_codec);
-      size += intMap_.CalculateSize(_map_intMap_codec);
-      size += floatMap_.CalculateSize(_map_floatMap_codec);
-      size += stringMap_.CalculateSize(_map_stringMap_codec);
-      size += bytesMap_.CalculateSize(_map_bytesMap_codec);
-      size += containerMap_.CalculateSize(_map_containerMap_codec);
+      size += booleans_.CalculateSize(_map_booleans_codec);
+      size += integers_.CalculateSize(_map_integers_codec);
+      size += floats_.CalculateSize(_map_floats_codec);
+      size += strings_.CalculateSize(_map_strings_codec);
+      size += bytes_.CalculateSize(_map_bytes_codec);
+      size += containers_.CalculateSize(_map_containers_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -505,12 +505,12 @@ namespace PJ.Native.Proto {
       if (other == null) {
         return;
       }
-      boolMap_.MergeFrom(other.boolMap_);
-      intMap_.MergeFrom(other.intMap_);
-      floatMap_.MergeFrom(other.floatMap_);
-      stringMap_.MergeFrom(other.stringMap_);
-      bytesMap_.MergeFrom(other.bytesMap_);
-      containerMap_.MergeFrom(other.containerMap_);
+      booleans_.MergeFrom(other.booleans_);
+      integers_.MergeFrom(other.integers_);
+      floats_.MergeFrom(other.floats_);
+      strings_.MergeFrom(other.strings_);
+      bytes_.MergeFrom(other.bytes_);
+      containers_.MergeFrom(other.containers_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -527,27 +527,27 @@ namespace PJ.Native.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            boolMap_.AddEntriesFrom(input, _map_boolMap_codec);
+            booleans_.AddEntriesFrom(input, _map_booleans_codec);
             break;
           }
           case 18: {
-            intMap_.AddEntriesFrom(input, _map_intMap_codec);
+            integers_.AddEntriesFrom(input, _map_integers_codec);
             break;
           }
           case 26: {
-            floatMap_.AddEntriesFrom(input, _map_floatMap_codec);
+            floats_.AddEntriesFrom(input, _map_floats_codec);
             break;
           }
           case 34: {
-            stringMap_.AddEntriesFrom(input, _map_stringMap_codec);
+            strings_.AddEntriesFrom(input, _map_strings_codec);
             break;
           }
           case 42: {
-            bytesMap_.AddEntriesFrom(input, _map_bytesMap_codec);
+            bytes_.AddEntriesFrom(input, _map_bytes_codec);
             break;
           }
           case 50: {
-            containerMap_.AddEntriesFrom(input, _map_containerMap_codec);
+            containers_.AddEntriesFrom(input, _map_containers_codec);
             break;
           }
         }
@@ -566,27 +566,27 @@ namespace PJ.Native.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 10: {
-            boolMap_.AddEntriesFrom(ref input, _map_boolMap_codec);
+            booleans_.AddEntriesFrom(ref input, _map_booleans_codec);
             break;
           }
           case 18: {
-            intMap_.AddEntriesFrom(ref input, _map_intMap_codec);
+            integers_.AddEntriesFrom(ref input, _map_integers_codec);
             break;
           }
           case 26: {
-            floatMap_.AddEntriesFrom(ref input, _map_floatMap_codec);
+            floats_.AddEntriesFrom(ref input, _map_floats_codec);
             break;
           }
           case 34: {
-            stringMap_.AddEntriesFrom(ref input, _map_stringMap_codec);
+            strings_.AddEntriesFrom(ref input, _map_strings_codec);
             break;
           }
           case 42: {
-            bytesMap_.AddEntriesFrom(ref input, _map_bytesMap_codec);
+            bytes_.AddEntriesFrom(ref input, _map_bytes_codec);
             break;
           }
           case 50: {
-            containerMap_.AddEntriesFrom(ref input, _map_containerMap_codec);
+            containers_.AddEntriesFrom(ref input, _map_containers_codec);
             break;
           }
         }

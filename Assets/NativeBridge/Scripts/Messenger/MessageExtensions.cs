@@ -1,5 +1,6 @@
 using PJ.Native.Proto;
 using Google.Protobuf;
+using System.Collections.Generic;
 
 namespace PJ.Native.Messenger
 {
@@ -7,48 +8,48 @@ namespace PJ.Native.Messenger
     {
         public static void Add(this Container self, string key, bool value)
         {
-            self.BoolMap.Add(key, value);
+            self.Booleans.Add(key, value);
         }
         public static void Add(this Container self, string key, int value)
         {
-            self.IntMap.Add(key, value);
+            self.Integers.Add(key, value);
         }
         public static void Add(this Container self, string key, float value)
         {
-            self.FloatMap.Add(key, value);
+            self.Floats.Add(key, value);
         }
         public static void Add(this Container self, string key, string value)
         {
-            self.StringMap.Add(key, value);
+            self.Strings.Add(key, value);
         }
         public static void Add(this Container self, string key, byte[] value)
         {
-            self.BytesMap.Add(key, ByteString.CopyFrom(value));
+            self.Bytes.Add(key, ByteString.CopyFrom(value));
         }
         public static void Add(this Container self, string key, Container container)
         {
-            self.ContainerMap.Add(key, container);
+            self.Containers.Add(key, container);
         }
 
         public static bool TryGetValue(this Container self, string key, out bool value)
         {
-            return self.BoolMap.TryGetValue(key, out value);
+            return self.Booleans.TryGetValue(key, out value);
         }
         public static bool TryGetValue(this Container self, string key, out int value)
         {
-            return self.IntMap.TryGetValue(key, out value);
+            return self.Integers.TryGetValue(key, out value);
         }
         public static bool TryGetValue(this Container self, string key, out float value)
         {
-            return self.FloatMap.TryGetValue(key, out value);
+            return self.Floats.TryGetValue(key, out value);
         }
         public static bool TryGetValue(this Container self, string key, out string value)
         {
-            return self.StringMap.TryGetValue(key, out value);
+            return self.Strings.TryGetValue(key, out value);
         }
         public static bool TryGetValue(this Container self, string key, out byte[] value)
         {
-            if(self.BytesMap.TryGetValue(key, out ByteString byteString))
+            if(self.Bytes.TryGetValue(key, out ByteString byteString))
             {
                 value = byteString.ToByteArray();
                 return true;
@@ -58,6 +59,10 @@ namespace PJ.Native.Messenger
                 value = null;
                 return false;
             }
+        }
+        public static bool TryGetValue(this Container self, string key, out Container value)
+        {
+            return self.Containers.TryGetValue(key, out value);
         }
     }
 }

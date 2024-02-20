@@ -5,13 +5,11 @@ using UnityEngine;
 
 namespace PJ.Native.Bridge
 {
-    public delegate void NativeMessageCallback(string message);
+    public delegate void NativeDataCallback(byte[] data);
     public interface INativeBridge
     {
-        // NativeMessageCallback MessageCallback {get; set;}
-        void AddNativeMessageListener(NativeMessageCallback listener);
-        void Send(string message);
-
+        void SetNativeDataListener(NativeDataCallback listener);
+        void Send(byte[] data);
     }
 }
 

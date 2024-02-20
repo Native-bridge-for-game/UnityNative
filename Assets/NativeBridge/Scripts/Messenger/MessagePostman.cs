@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using PJ.Native.Proto;
 using UnityEngine;
 
 namespace PJ.Native.Messenger
 {
     public class MessagePostman : MessageHolder
     {
-        private MessageNode notifier;
+        private Receivable messageHost;
         public Message Message 
         {
             get;
@@ -15,17 +16,17 @@ namespace PJ.Native.Messenger
         public MessagePostman(Message message)
         {
             this.Message = message;
-            this.notifier = null;
+            this.messageHost = null;
         }
-        public MessagePostman(Message message, MessageNode notifier)
+        internal MessagePostman(Message message, Receivable notifier)
         {
             this.Message = message;
-            this.notifier = notifier;
+            this.messageHost = notifier;
         }
 
         public void GiveBack(Message message)
         {
-            MessageManager.Instance.Mediator.GiveBack(message, notifier);
+            MessageManager.Instance.Mediator.GiveBack(message, messageHost);
         }
     }
 }

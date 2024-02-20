@@ -298,20 +298,21 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 #if defined(__OBJC__)
-@class NSString;
+@protocol SwiftCallback;
+@class NSData;
 
-SWIFT_PROTOCOL("_TtP7iOSCore13SwiftCallback_")
-@protocol SwiftCallback
-- (void)fromSwiftWithData:(NSString * _Nonnull)data;
+SWIFT_CLASS("_TtC7iOSCore4Game")
+@interface Game : NSObject
+- (nonnull instancetype)initWithCallback:(id <SwiftCallback> _Nonnull)callback OBJC_DESIGNATED_INITIALIZER;
+- (void)sendWithData:(NSData * _Nonnull)data;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
-SWIFT_CLASS("_TtC7iOSCore9SwiftSide")
-@interface SwiftSide : NSObject
-- (nonnull instancetype)initWithCallback:(id <SwiftCallback> _Nonnull)callback OBJC_DESIGNATED_INITIALIZER;
-- (void)sendWithData:(NSString * _Nonnull)data;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+SWIFT_PROTOCOL("_TtP7iOSCore13SwiftCallback_")
+@protocol SwiftCallback
+- (void)fromSwiftWithData:(NSData * _Nonnull)data;
 @end
 
 #endif

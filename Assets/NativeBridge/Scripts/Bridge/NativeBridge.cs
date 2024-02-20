@@ -1,33 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using PJ.Core.Util;
-using System;
-
 
 namespace PJ.Native.Bridge
 {
-    public class NativeBridge : Singleton<NativeBridge>, INativeBridge
+    public class NativeBridge : INativeBridge
     {
         private INativeBridge bridge;
 
-        protected override void Initialize()
+        public NativeBridge()
         {
-#if UNITY_ANDROID 
+#if UNITY_ANDROID && !UNITY_EDITOR
             bridge = new AndroidBridge();
-#elif UNITY_IOS
+#elif UNITY_IOS && !UNITY_EDITOR
             bridge = new iOSBridge();
+#else
+            bridge = new EditorBridge();
 #endif 
         }
-    
-        public void Send(string message)
+
+        public void SetNativeDataListener(NativeDataCallback listener)
         {
-            bridge?.Send(message);
+            bridge?.SetNativeDataListener(listener);
+        }
+    
+        public void Send(byte[] data)
+        {
+            bridge?.Send(data);
         }
 
-        public void AddNativeMessageListener(NativeMessageCallback listener)
-        {
-            bridge.AddNativeMessageListener(listener);
-        }
     }
 }

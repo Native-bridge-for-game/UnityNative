@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using PJ.Native.Proto;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,74 +9,34 @@ namespace PJ.Native.Messenger
 {
     public class MessageMediatorImpl : MessageMediator
     {
-        private Dictionary<string, List<MessageNode>> receiverDict = new Dictionary<string, List<MessageNode>>();
-        private HashSet<MessageNode> receiverSet = new HashSet<MessageNode>();
+        private Dictionary<int, MessageNode> idFilter;
 
-        public void Add(MessageNode receiver)
+        public MessageMediatorImpl()
         {
-            List<string> messageTypes = receiver.GetReceivingMessageTypes();
-            if(messageTypes == null)
+            idFilter = new Dictionary<int, MessageNode>();
+        }
+
+        public void Register(MessageNode node)
+        {
+            idFilter[node.ID] = node;
+        }
+
+        public void Notify(Message message, Tag tag, Notifier notifier)
+        {
+            MessageHolder holder = new MessagePostman(message, linkReceiver(notifier));
+            foreach(var node in idFilter.Values.Where(node => node.Tag.Contains(tag)))
             {
-                receiverSet.Add(receiver);
-            }
-            else
-            {
-                foreach(var messageType in messageTypes)
-                {
-                    if(receiverDict.TryGetValue(messageType, out var list))
-                    {
-                        list.Add(receiver);
-                    }
-                    else
-                    {
-                        var newList = new List<MessageNode>();
-                        newList.Add(receiver);
-                        receiverDict[messageType] = newList;
-                    }
-                }
+                if(node.HasKey(message.Key) && notifier.ID != node.ID)
+                    node.OnReceive(holder);
             }
         }
 
-        public void Add(MessageNode receiver, string messageType)
+        private Receivable linkReceiver(Notifier publisher)
         {
-            if(receiverDict.TryGetValue(messageType, out var list)){
-                list.Add(receiver);
-            }
-            else
-            {
-                var newList = new List<MessageNode>();
-                newList.Add(receiver);
-                receiverDict[messageType] = newList;
-            }
-        }
+            return idFilter[publisher.ID];
+        } 
 
-        public void Notify(Message message, MessageNode notifier)
-        {
-            MessageHolder holder = new MessagePostman(message, notifier);
-            if(receiverDict.TryGetValue(message.Type, out List<MessageNode> receivers))
-            {
-                foreach(var receiver in receivers)
-                {
-                    receiver.OnReceive(holder);
-                }
-            }
-
-            foreach(var receiver in receiverSet)
-            {
-                if(notifier != receiver)
-                {
-                    receiver.OnReceive(holder);
-                }
-            }
-        }
-
-        public void Notify(Message message, MessageNode notifier, MessageNode receiver)
-        {
-            MessageHolder holder = new MessagePostman(message, notifier);
-            receiver.OnReceive(holder);
-        }
-
-        public void GiveBack(Message message, MessageNode giveBacked)
+        public void GiveBack(Message message, Receivable giveBacked)
         {
             MessageHolder holder = new MessagePostman(message);
             giveBacked.OnReceive(holder);

@@ -5,6 +5,7 @@ Helps comunication between unity and native(Android, iOS)
 
 ### Container
 Data storing unit.
+
 Currently storess the following types:
 - bool
 - int
@@ -24,12 +25,12 @@ Filters message
 - Notifies message with Tags. messages are arrived messageHandlers which have tags all.
 
 ### MessageHandler
-Notifies message to other unity or native MessageHandler object.
-Also subscribes message from other unity or native MessageHandler object.
+Notify and subscribe messages.
+- Notifies message to other unity or native MessageHandler object. 
+- Subscribes message from other unity or native MessageHandler object.
 
 ### Usage
-Code opens native alert 
-Need Android/iOS implementation comunicate with this code.
+Code opens native alert. Need Android/iOS implementation comunicate with this code.
 ```cs
 using PJ.Native.Messenger
 

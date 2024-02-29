@@ -1,9 +1,9 @@
 {
   "dependencies": {
     "com.psmjzzz.nativebridge": {
-      "version": "file:/Users/sangminpark/repo/com.psmjazz.nativebridge",
+      "version": "file:com.psmjazz.nativebridge",
       "depth": 0,
-      "source": "local",
+      "source": "embedded",
       "dependencies": {}
     },
     "com.unity.2d.animation": {

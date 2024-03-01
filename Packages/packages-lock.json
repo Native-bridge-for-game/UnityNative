@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.psmjzzz.nativebridge": {
+    "com.psmjzz.nativebridge": {
       "version": "file:com.psmjazz.nativebridge",
       "depth": 0,
       "source": "embedded",

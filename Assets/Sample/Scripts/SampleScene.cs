@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using PJ.Native.Bridge;
-using PJ.Native.Messenger;
+using PJ.Native.PubSub;
 using PJ.Native.Proto;
 using UnityEngine;
 

@@ -19,21 +19,22 @@ public class SampleKit
     private void OnTestReturn(Channel channel)
     {
         if(channel.Message.Container.TryGetValue("data", out string data))
-            Debug.Log("Unity... SampleNode : " + data);
+            Debug.Log("SampleKit... SampleNode : " + data);
         else
-            Debug.Log("Unity... SampleNode : no data");
+            Debug.Log("SampleKit... SampleNode : no data");
     }
 
     private void OnNative(Channel channel)
     {
-        if(channel.Message.Container.TryGetValue("data", out string data)){
-            Debug.Log("Unity... Native : " + data);
+        if(channel.Message.Container.TryGetValue("data", out string data))
+        {
+            Debug.Log("SampleKit... Native : " + data);
 
             Message reply = new Message("nativeReturn");
             channel.Reply(reply);
         }
         else
-            Debug.Log("Unity... Native : no data");
+            Debug.Log("SampleKit... Native : no data");
     }
 
     public void CallTest()

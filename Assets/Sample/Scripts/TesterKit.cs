@@ -9,7 +9,8 @@ public class TesterKit
     private Messenger messenger;
     public TesterKit()
     {
-        messenger = new Messenger(Tag.Game);
+        messenger = new Messenger();
+        Debug.Log("Testerkit handler id : " + messenger.ID);
         messenger.Subscribe("native", OnNative);
         messenger.Subscribe("testReturn", OnTestReturn);
     }

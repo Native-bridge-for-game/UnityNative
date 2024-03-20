@@ -11,7 +11,8 @@ public class SampleKit
 
     public SampleKit()
     {
-        handler = new Messenger(Tag.Game);
+        handler = new Messenger();
+        Debug.Log("samplekit handler id : " + handler.ID);
         handler.Subscribe("testReturn", OnTestReturn);
         handler.Subscribe("native", OnNative);
     } 
@@ -42,11 +43,11 @@ public class SampleKit
         Container container1 = new Container();
         container1.Add("data", "first");
         Message message1 = new Message("test", container1);
-        handler.Publish(message1, Tag.Native);
+        handler.Publish(message1);
         
         Container container2 = new Container();
         container2.Add("data", "second");
         Message message2 = new Message("testRecall", container2);
-        handler.Publish(message2, Tag.Native);
+        handler.Publish(message2);
     }
 }

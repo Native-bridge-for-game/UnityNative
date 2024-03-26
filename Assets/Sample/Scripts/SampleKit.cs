@@ -7,14 +7,15 @@ using UnityEngine;
 
 public class SampleKit
 {
-    private Messenger handler;
+    private Messenger messenger;
 
     public SampleKit()
     {
-        handler = new Messenger();
-        Debug.Log("samplekit handler id : " + handler.ID);
-        handler.Subscribe("testReturn", OnTestReturn);
-        handler.Subscribe("native", OnNative);
+        messenger = new Messenger();
+        Debug.Log("samplekit handler id : " + messenger.ID);
+        messenger.SetBaseTag(Tag.Native);
+        messenger.Subscribe("testReturn", OnTestReturn);
+        messenger.Subscribe("native", OnNative);
     } 
 
     private void OnTestReturn(Channel channel)
@@ -43,11 +44,11 @@ public class SampleKit
         Container container1 = new Container();
         container1.Add("data", "first");
         Message message1 = new Message("test", container1);
-        handler.Publish(message1);
+        messenger.Publish(message1);
         
         Container container2 = new Container();
         container2.Add("data", "second");
         Message message2 = new Message("testRecall", container2);
-        handler.Publish(message2);
+        messenger.Publish(message2);
     }
 }

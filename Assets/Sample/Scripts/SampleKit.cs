@@ -13,27 +13,28 @@ public class SampleKit
     {
         messenger = new Messenger();
         Debug.Log("samplekit handler id : " + messenger.ID);
+        messenger.SetTagRule(Tag.Game);
         messenger.SetBaseTag(Tag.Native);
         messenger.Subscribe("testReturn", OnTestReturn);
         messenger.Subscribe("native", OnNative);
     } 
 
-    private void OnTestReturn(Channel channel)
+    private void OnTestReturn(Message message)
     {
-        if(channel.Message.Container.TryGetValue("data", out string data))
+        if(message.Container.TryGetValue("data", out string data))
             Debug.Log("SampleKit... SampleNode : " + data);
         else
             Debug.Log("SampleKit... SampleNode : no data");
     }
 
-    private void OnNative(Channel channel)
+    private void OnNative(Message message)
     {
-        if(channel.Message.Container.TryGetValue("data", out string data))
+        if(message.Container.TryGetValue("data", out string data))
         {
             Debug.Log("SampleKit... Native : " + data);
 
             Message reply = new Message("nativeReturn");
-            channel.Reply(reply);
+            messenger.Publish(reply);
         }
         else
             Debug.Log("SampleKit... Native : no data");

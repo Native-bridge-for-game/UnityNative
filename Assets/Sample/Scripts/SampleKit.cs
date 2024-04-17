@@ -13,8 +13,8 @@ public class SampleKit
     {
         messenger = new Messenger();
         Debug.Log("samplekit handler id : " + messenger.ID);
-        messenger.SetTagRule(Tag.Game);
-        messenger.SetBaseTag(Tag.Native);
+        messenger.SetReceivingRule(Tag.Game);
+        messenger.SetBasePublishingTag(Tag.Native);
         messenger.Subscribe("testReturn", OnTestReturn);
         messenger.Subscribe("native", OnNative);
     } 

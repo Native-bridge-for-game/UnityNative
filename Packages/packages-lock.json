@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.psmjzz.nativepubsub": {
-      "version": "file:com.psmjazz.nativebridge",
+      "version": "file:NativePubSub",
       "depth": 0,
       "source": "embedded",
       "dependencies": {}

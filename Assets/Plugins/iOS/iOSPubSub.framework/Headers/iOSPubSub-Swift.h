@@ -300,11 +300,13 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if defined(__OBJC__)
 @protocol SwiftCallback;
 @class NSData;
+@class NSString;
 
 SWIFT_CLASS("_TtC9iOSPubSub9GameRelay")
 @interface GameRelay : NSObject
 - (nonnull instancetype)initWithCallback:(id <SwiftCallback> _Nonnull)callback OBJC_DESIGNATED_INITIALIZER;
 - (void)sendWithData:(NSData * _Nonnull)data;
+- (void)sendWithString:(NSString * _Nonnull)string;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -313,6 +315,7 @@ SWIFT_CLASS("_TtC9iOSPubSub9GameRelay")
 SWIFT_PROTOCOL("_TtP9iOSPubSub13SwiftCallback_")
 @protocol SwiftCallback
 - (void)fromSwiftWithData:(NSData * _Nonnull)data;
+- (void)fromSwiftWithString:(NSString * _Nonnull)string;
 @end
 
 #endif

@@ -12,8 +12,9 @@ public class SampleKit
     public SampleKit()
     {
         messenger = new Messenger();
-        Debug.Log("samplekit handler id : " );
+        Debug.Log("samplekit subscribe..  : native, testReturn" );
         messenger.Subscribe("native", OnNative);
+        messenger.Subscribe("testReturn", OnNative);
     } 
 
     private void OnTestReturn(Message message)

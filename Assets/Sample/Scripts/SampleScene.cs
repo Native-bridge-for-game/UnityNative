@@ -12,7 +12,6 @@ public class SampleScene : MonoBehaviour
     {
         
         SampleKit sample = new SampleKit();
-        TesterKit _ = new TesterKit();
         sample.CallTest();
         
     }

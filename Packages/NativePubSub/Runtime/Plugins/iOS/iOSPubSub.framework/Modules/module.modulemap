@@ -1,4 +1,0 @@
-framework module iOSPubSub {
-  header "iOSPubSub-Swift.h"
-  requires objc
-}

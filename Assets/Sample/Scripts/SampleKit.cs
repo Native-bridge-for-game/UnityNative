@@ -1,8 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using PJ.Native.PubSub;
-using PJ.Native.Data;
+using MiniSDK.PubSub;
+using MiniSDK.PubSub.Data;
 using UnityEngine;
 
 public class SampleKit

@@ -7,62 +7,33 @@ namespace MiniSDK.Native
 {
     public class iOSBridge : INativeBridge
     {
-        private delegate void ObjcByteDelegate(IntPtr ptr, int length);
-        private static event NativeByteCallback ByteCallback;
-        [MonoPInvokeCallback(typeof(ObjcByteDelegate))]
-        private static void OnIOSByteEvent(IntPtr ptr, int length)
+        // private delegate void ObjcStringDelegate(string data);
+        private static event NativeCallback iOSNativeCallback;
+        [MonoPInvokeCallback(typeof(NativeCallback))]
+        private static void OnIOSStringEvent(string info, string json)
         {
-            byte[] data = new byte[length];
-            Marshal.Copy(ptr, data, 0, length);
-            ByteCallback?.Invoke(data);
+            iOSNativeCallback?.Invoke(info, json);
         }
         
-        private delegate void ObjcStringDelegate(string data);
-        private static event NativeStringCallback StringCallback;
-        [MonoPInvokeCallback(typeof(ObjcStringDelegate))]
-        private static void OnIOSStringEvent(string data)
-        {
-            StringCallback?.Invoke(data);
-        }
-        
-        
-
         [DllImport("__Internal")]
-        private static extern void __iOSInitialize(ObjcByteDelegate del);
+        private static extern void __iOSInitialize(NativeCallback stringDel);
         [DllImport("__Internal")]
-        private static extern void __iOSInitializeWithString(ObjcStringDelegate stringDel);
-        [DllImport("__Internal")]
-        private static extern void __iOSByteSend(IntPtr data, int length);
-        [DllImport("__Internal")]
-        private static extern void __iOSStringSend(string data);
+        private static extern void __iOSSend(string info, string data);
 
         public iOSBridge()
         {
-            __iOSInitializeWithString(OnIOSStringEvent);
+            __iOSInitialize(OnIOSStringEvent);
         }
 
-        public void SetNativeByteListener(NativeByteCallback listener)
+        public void SetNativeStringListener(NativeCallback listener)
         {
-            ByteCallback -= listener;
-            ByteCallback += listener;
+            iOSNativeCallback -= listener;
+            iOSNativeCallback += listener;
         }
 
-        public void SetNativeStringListener(NativeStringCallback listener)
+        public void Send(string info, string json)
         {
-            StringCallback -= listener;
-            StringCallback += listener;
-        }
-
-        public void Send(byte[] data)
-        {
-            GCHandle handle = GCHandle.Alloc(data, GCHandleType.Pinned);
-            __iOSByteSend(handle.AddrOfPinnedObject(), data.Length);
-            handle.Free();
-        }
-
-        public void Send(string json)
-        {
-            __iOSStringSend(json);
+            __iOSSend(info, json);
         }
     }
 }

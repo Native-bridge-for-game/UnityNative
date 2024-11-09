@@ -16,24 +16,14 @@ namespace MiniSDK.Native
 #endif 
         }
 
-        public void SetNativeByteListener(NativeByteCallback listener)
-        {
-            bridge?.SetNativeByteListener(listener);
-        }
-
-        public void SetNativeStringListener(NativeStringCallback listener)
+        public void SetNativeStringListener(NativeCallback listener)
         {
             bridge?.SetNativeStringListener(listener);
         }
 
-        public void Send(byte[] data)
+        public void Send(string info, string json)
         {
-            bridge?.Send(data);
-        }
-
-        public void Send(string json)
-        {
-            bridge?.Send(json);
+            bridge?.Send(info, json);
         }
     }
 }

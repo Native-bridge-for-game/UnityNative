@@ -3,28 +3,17 @@ namespace MiniSDK.Native
 {
     public class EditorBridge : INativeBridge
     {
-        private NativeByteCallback byteCallback;
-        private NativeStringCallback stringCallback;
-        public void SetNativeByteListener(NativeByteCallback listener)
-        {
-            byteCallback -= listener;
-            byteCallback += listener;
-        }
+        private NativeCallback callback;
         
-        public void SetNativeStringListener(NativeStringCallback listener)
+        public void SetNativeStringListener(NativeCallback listener)
         {
-            stringCallback += listener;
-            stringCallback -= listener;
+            callback += listener;
+            callback -= listener;
         }
 
-        public void Send(byte[] data)
+        public void Send(string info, string json)
         {
-            byteCallback?.Invoke(data);
-        }
-
-        public void Send(string json)
-        {
-            stringCallback?.Invoke(json);
+            callback?.Invoke(info, json);
         }
     }
 }

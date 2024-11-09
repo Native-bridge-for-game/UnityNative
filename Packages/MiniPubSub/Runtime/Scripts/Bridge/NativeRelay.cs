@@ -10,17 +10,21 @@ namespace MiniSDK.Native
         private INativeBridge bridge;
         private Watcher watcher;
 
-        private void OnReceiveFromNative(string data)
+        private void OnReceiveFromNative(string info, string json)
         {
-            Message message = JsonConvert.DeserializeObject<Message>(data);
+            Message message = new Message
+            {
+                Info = JsonConvert.DeserializeObject<MessageInfo>(info), 
+                Json = json
+            };
         
             watcher.Publish(message);
         }
 
         private void OnWatch(Message message)
         {
-            string data = JsonConvert.SerializeObject(message);
-            bridge.Send(data);
+            string info = JsonConvert.SerializeObject(message.Info);
+            bridge.Send(info, message.Json);
         }
 
         internal void Start()

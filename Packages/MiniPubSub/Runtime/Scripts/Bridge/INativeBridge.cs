@@ -1,16 +1,12 @@
 
 namespace MiniSDK.Native
 {
-    public delegate void NativeByteCallback(byte[] data);
-
-    public delegate void NativeStringCallback(string data);
+    public delegate void NativeCallback(string info, string json);
     
     public interface INativeBridge
     {
-        void SetNativeByteListener(NativeByteCallback listener);
-        void SetNativeStringListener(NativeStringCallback listener);
-        void Send(byte[] data);
-        void Send(string json);
+        void SetNativeStringListener(NativeCallback listener);
+        void Send(string info, string json);
     }
 }
 

@@ -6,27 +6,16 @@ namespace MiniSDK.Native
 {
     public class AndroidBridgeProxy : AndroidJavaProxy
     {
-        public event NativeByteCallback ByteCallback;
-        public event NativeStringCallback StringCallback;
+        public event NativeCallback StringCallback;
 
-        public AndroidBridgeProxy() : base("com.minisdk.pubsub.data.NativeBridgeCallback")
+        public AndroidBridgeProxy() : base("com.minisdk.pubsub.bridge.NativeBridgeCallback")
         {
             
         }
 
-        public void onReceive(sbyte[] sbytes)
+        public void onReceive(string info, string json)
         {
-            byte[] bytes = new byte[sbytes.Length];
-            for (int i = 0; i < sbytes.Length; i++)
-            {
-                bytes[i] = (byte) sbytes[i];
-            }
-            ByteCallback?.Invoke(bytes);
-        }
-
-        public void onReceiveString(string data)
-        {
-            StringCallback?.Invoke(data);
+            StringCallback?.Invoke(info, json);
         }
     }
 
@@ -46,31 +35,15 @@ namespace MiniSDK.Native
             androidBridge.Value.Call("initialize", androidBridgeProxy);
         }
 
-        public void SetNativeByteListener(NativeByteCallback listener)
-        {
-            androidBridgeProxy.ByteCallback -= listener;
-            androidBridgeProxy.ByteCallback += listener;
-        }
-
-        public void SetNativeStringListener(NativeStringCallback listener)
+        public void SetNativeStringListener(NativeCallback listener)
         {
             androidBridgeProxy.StringCallback -= listener;
             androidBridgeProxy.StringCallback += listener;
         }
 
-        public void Send(byte[] data)
+        public void Send(string info, string json)
         {
-            sbyte[] sbytes = new sbyte[data.Length];
-            for (int i = 0; i < data.Length; i++)
-            {
-                sbytes[i] = (sbyte) data[i];
-            }
-            androidBridge.Value.Call("send", sbytes);
-        }
-
-        public void Send(string json)
-        {
-            androidBridge.Value.Call("send", json);
+            androidBridge.Value.Call("send", info, json);
         }
     }
     

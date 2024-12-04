@@ -1,4 +1,4 @@
-#import "ObjcSide.h"
+#import "MiniPubSub/ObjcSide.h"
 
 extern "C"
 {

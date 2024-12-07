@@ -25,7 +25,7 @@ namespace MiniSDK.Native
 
         private Lazy<AndroidJavaObject> androidBridge = new Lazy<AndroidJavaObject>(()=>
         {
-            AndroidJavaObject obj = new AndroidJavaObject("com.minisdk.pubsub.bridge.unity.NativeBridge");
+            AndroidJavaObject obj = new AndroidJavaObject("com.minisdk.pubsub.bridge.UnityNativeBridge");
             return obj;
         });
 

@@ -5,7 +5,7 @@ namespace MiniSDK.Native
     {
         private NativeCallback callback;
         
-        public void SetNativeStringListener(NativeCallback listener)
+        public void SetNativeCallbackListener(NativeCallback listener)
         {
             callback += listener;
             callback -= listener;

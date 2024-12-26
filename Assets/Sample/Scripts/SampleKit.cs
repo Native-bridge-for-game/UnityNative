@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using MiniSDK.Core.Module;
 using MiniSDK.PubSub;
 using MiniSDK.PubSub.Data;
 using Newtonsoft.Json;
@@ -23,27 +24,25 @@ public struct ToastResult
     public string ToastCount;
 }
 
-public class SampleKit
+public class SampleKit : MessengerModuleBase
 {
 #if UNITY_IOS
     [DllImport("__Internal")]
     private static extern void __iOSSampleKitLoad();
 #endif
-    private Messenger messenger;
-    private bool isInitialized = false;
 
-    public SampleKit()
+    public override void Initialize()
     {
-        messenger = new Messenger();
-        Debug.Log("samplekit subscribe..  : native, testReturn" );
-        messenger.Subscribe("SEND_TOAST_RESULT", OnNative);
+        base.Initialize();
+        Messenger.Subscribe("SEND_TOAST_RESULT", OnNative);
     }
 
-    private void InitializeModule()
+    protected override void InitializeNativeModule()
     {
+        base.InitializeNativeModule();
 #if UNITY_ANDROID
-        AndroidJavaClass javaClass = new AndroidJavaClass("com.pj.sample.SampleKitLoader");
-        javaClass.CallStatic("load");
+        AndroidJavaObject loaderObject = new AndroidJavaObject("com.pj.sample.SampleKitLoader");
+        loaderObject.Call<string>("loadModule");
 #elif UNITY_IOS
         __iOSSampleKitLoad(); 
 #endif
@@ -56,11 +55,6 @@ public class SampleKit
 
     public void CallTest()
     {
-        if (isInitialized == false)
-        {
-            isInitialized = true;
-            InitializeModule();       
-        }
-        messenger.Publish(new Message("SEND_TOAST", new ToastData{ToastDuration = 1, ToastMessage = "toast of unity"}));
+        Messenger.Publish(new Message("SEND_TOAST", new ToastData{ToastDuration = 1, ToastMessage = "toast of unity"}));
     }
 }

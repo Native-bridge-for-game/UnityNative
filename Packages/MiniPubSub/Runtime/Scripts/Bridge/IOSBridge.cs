@@ -5,14 +5,14 @@ using AOT;
 
 namespace MiniSDK.Native
 {
-    public class iOSBridge : INativeBridge
+    public class IOSBridge : INativeBridge
     {
         // private delegate void ObjcStringDelegate(string data);
-        private static event NativeCallback iOSNativeCallback;
+        private static event NativeCallback IOSNativeCallback;
         [MonoPInvokeCallback(typeof(NativeCallback))]
         private static void OnIOSStringEvent(string info, string json)
         {
-            iOSNativeCallback?.Invoke(info, json);
+            IOSNativeCallback?.Invoke(info, json);
         }
         
         [DllImport("__Internal")]
@@ -20,15 +20,15 @@ namespace MiniSDK.Native
         [DllImport("__Internal")]
         private static extern void __iOSSend(string info, string data);
 
-        public iOSBridge()
+        public IOSBridge()
         {
             __iOSInitialize(OnIOSStringEvent);
         }
 
-        public void SetNativeStringListener(NativeCallback listener)
+        public void SetNativeCallbackListener(NativeCallback listener)
         {
-            iOSNativeCallback -= listener;
-            iOSNativeCallback += listener;
+            IOSNativeCallback -= listener;
+            IOSNativeCallback += listener;
         }
 
         public void Send(string info, string json)

@@ -1,15 +1,17 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class SampleScene : MonoBehaviour
 {
 
-    public Button TestToastButton;
+    public Button testToastButton;
     // Start is called before the first frame update
     
-    private SampleKit sample = new SampleKit();
+    private readonly SampleKit sample = new SampleKit();
     void Start()
     {
-        TestToastButton.onClick.AddListener(sample.CallTest);
+        sample.Initialize();
+        testToastButton.onClick.AddListener(sample.CallTest);
     }
 }

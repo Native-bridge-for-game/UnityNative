@@ -6,7 +6,7 @@ namespace MiniSDK.Native
 {
     public class AndroidBridgeProxy : AndroidJavaProxy
     {
-        public event NativeCallback StringCallback;
+        public event NativeCallback NativeCallback;
 
         public AndroidBridgeProxy() : base("com.minisdk.pubsub.bridge.NativeBridgeCallback")
         {
@@ -15,7 +15,7 @@ namespace MiniSDK.Native
 
         public void onReceive(string info, string json)
         {
-            StringCallback?.Invoke(info, json);
+            NativeCallback?.Invoke(info, json);
         }
     }
 
@@ -35,10 +35,10 @@ namespace MiniSDK.Native
             androidBridge.Value.Call("initialize", androidBridgeProxy);
         }
 
-        public void SetNativeStringListener(NativeCallback listener)
+        public void SetNativeCallbackListener(NativeCallback listener)
         {
-            androidBridgeProxy.StringCallback -= listener;
-            androidBridgeProxy.StringCallback += listener;
+            androidBridgeProxy.NativeCallback -= listener;
+            androidBridgeProxy.NativeCallback += listener;
         }
 
         public void Send(string info, string json)

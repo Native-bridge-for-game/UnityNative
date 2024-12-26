@@ -10,15 +10,15 @@ namespace MiniSDK.Native
 #if UNITY_ANDROID && !UNITY_EDITOR
             bridge = new AndroidBridge();
 #elif UNITY_IOS && !UNITY_EDITOR
-            bridge = new iOSBridge();
+            bridge = new IOSBridge();
 #else
             bridge = new EditorBridge();
 #endif 
         }
 
-        public void SetNativeStringListener(NativeCallback listener)
+        public void SetNativeCallbackListener(NativeCallback listener)
         {
-            bridge?.SetNativeStringListener(listener);
+            bridge?.SetNativeCallbackListener(listener);
         }
 
         public void Send(string info, string json)
